@@ -72,7 +72,7 @@ NOTE: formally, the tunnel from this example can be created using SSH port forwa
 
 ## Build
 
-To build `roi-parser` from source code use following command:
+To build `simple-tunnel` from source code use following command:
 
 ```sh
 cargo build --release
