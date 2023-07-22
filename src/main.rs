@@ -83,23 +83,17 @@ async fn server_server(
     }
 }
 
-async fn read_and_connect(
+async fn wait_and_connect(
     read_stream: &mut TcpStream,
     remote_address: &str,
 ) -> Result<Option<TcpStream>, Box<dyn Error>> {
     let mut buffer = [0; BUFFER_SIZE];
-    let length = read_stream.read(&mut buffer).await?;
-    let result = if length == 0 {
-        None
-    } else {
-        let mut redirect_stream = TcpStream::connect(remote_address).await?;
+    let length = read_stream.peek(&mut buffer).await?;
 
-        redirect_stream.write_all(&buffer[0..length]).await?;
-
-        Some(redirect_stream)
-    };
-
-    Ok(result)
+    match length {
+        0 => Ok(None),
+        _ => Ok(Some(TcpStream::connect(remote_address).await?)),
+    }
 }
 
 async fn client_client_one(
@@ -130,7 +124,7 @@ async fn client_client_one(
 
         info!("Waiting for data...");
 
-        let redirect_stream = match read_and_connect(&mut connect_stream, redirect_address).await {
+        let redirect_stream = match wait_and_connect(&mut connect_stream, redirect_address).await {
             Ok(Some(stream)) => stream,
             Ok(None) => continue,
             Err(error) => {
