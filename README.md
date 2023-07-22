@@ -46,7 +46,7 @@ We want to work with a notebook using an RDP connection from our computer. Howev
 connections from `192.168.1.0/24` network. But we can still connect to any resource in `192.168.1.0/24` from notebook,
 see image below.
 
-![User Interface](images/example.png "Computer in example network")
+![User Interface](images/example.svg "Computer in example network")
 
 The solution is to create a TCP tunnel between the address `127.0.0.1:3389` on the notebook and the address
 `127.0.0.1:3389` on the computer. Using two instances of `simple-tunnel` to create a pipe with on-demand connecting
