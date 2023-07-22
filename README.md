@@ -6,8 +6,6 @@ close all connections in pipe and start to wait next client.
 
 NOTE: using this utility in public networks can lead to leaking your personal data, passwords or security keys.
 
-Local database will be created in file `db.sqlite`. WEB server will be available on [localhost|http://localhost:8080/].
-
 ## Command line options
 
 Utility support several model as subcommands:
