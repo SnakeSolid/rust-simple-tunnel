@@ -20,6 +20,21 @@ clients. This subcommand support following options:
 
 Both addresses are required, and must be different. Addresses have the same processing rule, names show only pipe side.
 
+### client-server
+
+In this mode single listening socket will be created. When clients connected to this socket all data will be redirected
+to client part. This subcommand support following options:
+
+* `-c`, `--client` <address:port> - client address, example `192.168.1.1:1080`;
+* `-s`, `--server` <address:port> - server address, example `127.0.0.1:1080`;
+* `-m`, `--mode` <mode> - connection mode, required parameter (one of `listen` or `connect`);
+* `-t`, `--timeout` <timeout> - interval between reconnections in seconds, default: 10;
+
+Connection modes can be used to control which client will be connected first:
+
+* `listen` - wait connection on listening socket then connect to client address and create pipe;
+* `connect` - try to connect to client address then wait connection on listening socket;
+
 ### client-client
 
 In this mode two listening sockets will be created. When clients connected to both sockets utility create pipe between
@@ -29,7 +44,7 @@ clients. This subcommand support following options:
 * `-i`, `--internal` <address:port> - internal address, example `127.0.0.1:1080`;
 * `-m`, `--mode` <mode> - connection mode, required parameter (one of `external`, `internal` or `both`);
 * `-t`, `--timeout` <timeout> - interval between reconnections in seconds, default: 10;
-t
+
 Connection modes can be used to control which client will be connected first:
 
 * `external` - connect to external server and wait for first packet, then connect to internal server;
