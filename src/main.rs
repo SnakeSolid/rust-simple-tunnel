@@ -7,7 +7,6 @@ use options::ClientServerMode;
 use options::Options;
 use std::error::Error;
 use std::time::Duration;
-use std::unimplemented;
 use structopt::StructOpt;
 use tokio::io::AsyncReadExt;
 use tokio::io::AsyncWriteExt;
