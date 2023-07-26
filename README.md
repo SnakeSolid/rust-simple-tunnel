@@ -8,7 +8,7 @@ NOTE: using this utility in public networks can lead to leaking your personal da
 
 ## Command line options
 
-Utility support several model as subcommands:
+Utility support several modes as subcommands:
 
 ### server-server
 
